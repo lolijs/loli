@@ -11,7 +11,7 @@ module.exports={
     local:{
         prefix:'/',
         root:'./',
-        index:'/src/master/main.html'
+        index:'/main.html'
     },
     // local也可以配置为代理模式, 以便于启用php模版或其他功能
     //local:'http://somelocalhost:8080/prefix',

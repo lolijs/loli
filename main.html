@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>首页</title>
+
+        <!-- 依赖 -->
+        <script src="/external/avalon/avalon.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            // avalon 配置
+            avalon.config({loader: false})
+        </script>
+        <script src="/external/jquery/jquery.js" type="text/javascript"></script>
+        <script src="/external/root/loli.js" type="text/javascript"></script>
+        <script src="/external/root/loli.avalon.js" type="text/javascript"></script>
+        <script src="/external/require/require.js" type="text/javascript"></script>
+        <script src="/external/require/require-config.js" type="text/javascript"></script>
+    </head>
+    <body ms-important="master.main">
+
+        <div ms-controller="master.main.head" 
+            ms-include-src="{{view.url}}">
+
+        </div>
+
+        <!-- 布局 -->
+        <div ms-repeat="view.layout" 
+            ms-class="$key">{{$val}} {{view.head.title}}</div>
+
+        <a ms-on-click="event.submit(model)">保存</a>
+
+        <!-- 尾部公用js -->
+        <script type="text/javascript">
+            ;(function(av){
+                "use strict";
+                var vm = av.define({
+                    $id : "master.main",
+                    // 布局对象
+                    view : {
+                        layout : {
+                            east : true,
+                            south : true,
+                            west : true,
+                            north : true,
+                            central : true
+                        },
+                        head : {
+                            title : "首页"
+                        }
+                    },
+
+                    // 事件对象
+                    event : {
+                        submit : function(data){
+                            console.log(data,data.$model.a);
+                            data.sent("/api/dd",data.$model.a);
+                        }
+                    },
+
+                    // 数据对象
+                    model : {
+                        a:1,
+                        b:2
+                    }
+
+                });
+
+                // 添加监听
+                {
+                    // title的监听
+                    vm.view.head.$watch("title",function(v){
+                        $("head:first title").text(v);
+                    });
+                }
+
+                // 测试
+                {
+                    setTimeout(function(){
+                        // model
+                        console.log(av.vmodels);
+                        var vm = av.vmodels["master.main"];
+                        vm.view.head.title = "dd";
+                    },1000);
+                }
+                
+
+            })(loli.avalon);
+        </script>
+
+        <script type="text/javascript">
+        ;(function(av){
+            "use strict";
+            var vm = av.define({
+                $id : "master.main.head",
+                view : {
+                    url : require.toUrl("modules/menu/indexmenu.html")
+                },
+                event : {},
+                model : {}
+            });
+        })(loli.avalon);
+        </script>
+    </body>
+</html>
