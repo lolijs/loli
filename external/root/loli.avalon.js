@@ -11,9 +11,9 @@
         setting.model = param.model;
         setting.event = param.event;
         
-        var model = av.define(setting);
+        var mm = av.define(setting);
         // 对model 做封装
-        model.model.sent = function(url,data){
+        mm.model.sent = function(url,data){
             data = data || this.$model;
             console.log(url,data);
             $.ajax({
@@ -21,9 +21,9 @@
                 data : data
             });
         };
-        return model;
+        return mm;
     };
 
-    console.log(loli.avalon);
+    console.log("loli.avalon");
 
 })(loli,avalon,jQuery);
