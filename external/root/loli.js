@@ -1,8 +1,7 @@
-;(function(av,win,undefined){
+;define(function(){
     "use strict";
     var loli = {};
 
-
-    win["loli"] = loli;
-
-})(avalon,window);
+    window["loli"] = loli;
+    return loli;
+});

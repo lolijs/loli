@@ -1,5 +1,10 @@
-;(function(loli,av,$){
+define(["loli","avalon"],function(loli,av){
     "use strict";
+
+    avalon.config({loader: false});
+
+    console.log("loli.avalon",av);
+
     loli.avalon = {};
     avalon.mix(loli.avalon,av);
 
@@ -24,6 +29,5 @@
         return mm;
     };
 
-    console.log("loli.avalon");
-
-})(loli,avalon,jQuery);
+    return loli.avalon;
+});

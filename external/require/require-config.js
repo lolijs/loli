@@ -1,6 +1,6 @@
-'use strict';
-! function() {
-	//请确保modules第一个被赋值
+;define(function(){
+    'use strict';
+    //请确保modules第一个被赋值
 	var modules = {},
 		//请确保srcRoot第二个被赋值
 		srcRoot = 'src/',
@@ -27,4 +27,4 @@
 		debug: debug
 	};
 	//若需要从外部获得模块路径请使用require.toUrl('family/name')
-}();
+});

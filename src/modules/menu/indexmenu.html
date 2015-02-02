@@ -4,7 +4,7 @@
     </li>
 </ul>
 <script type="text/javascript">
-;(function(av){
+;require(["av"],function(av){
     "use strict";
     var vm = av.define({
         $id : "menu.indexmenu",
@@ -14,5 +14,6 @@
         event : {},
         model : {}
     });
-})(loli.avalon);
+    av.scan();
+});
 </script>

@@ -1,14 +1,14 @@
-// 1. 标准写法
+1. 标准写法
 
-;(function(av){
-    "use strict";
-    var vm = av.define({
-        $id : "目录名.文件名",
-        view : {},
-        event : {},
-        model : {}
-    });
-})(loli.avalon);
+	;(function(av){
+	    "use strict";
+	    var vm = av.define({
+	        $id : "目录名.文件名",
+	        view : {},
+	        event : {},
+	        model : {}
+	    });
+	})(loli.avalon);
 
 // 构建思路
 1. mvvm 渲染页面
@@ -18,3 +18,4 @@
 	view : 跟视图相关数据
 	event : 事件
 	model : 数据模型 , 需要后台交互的数据
+3. 封装model层, 让数据自动提交

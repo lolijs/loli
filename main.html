@@ -4,19 +4,36 @@
         <meta charset="UTF-8">
         <title>首页</title>
 
-        <!-- 依赖 -->
-        <script src="/external/avalon/avalon.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            // avalon 配置
-            avalon.config({loader: false})
-        </script>
-        <script src="/external/jquery/jquery.js" type="text/javascript"></script>
-        <script src="/external/root/loli.js" type="text/javascript"></script>
-        <script src="/external/root/loli.avalon.js" type="text/javascript"></script>
         <script src="/external/require/require.js" type="text/javascript"></script>
-        <script src="/external/require/require-config.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            ;(function(){
+                'use strict';
+                var paths = {
+                    "loli" : "/external/root/loli",
+                    "avalon" : "/external/avalon/avalon.shim",
+                    "av" : "/external/root/loli.avalon"
+                };
+
+                require.config({
+                    paths: paths
+                });
+
+                require([
+                    "/external/require/require-config.js"
+                ]);
+            })();
+        </script>
+
+        <!-- 依赖 -->
+        
+        
+        <script src="/external/jquery/jquery.js" type="text/javascript"></script>
+        
+        
+            
+        
     </head>
-    <body ms-controller="master.main">
+    <body ms-controller="master.main" id="testID">
 
         <div ms-controller="master.main.head" 
             ms-include-src="{{view.url}}">
@@ -31,8 +48,9 @@
 
         <!-- 尾部公用js -->
         <script type="text/javascript">
-            ;(function(av){
+            ;require(["av"],function(av){
                 "use strict";
+                
                 var vm = av.define({
                     $id : "master.main",
                     // 布局对象
@@ -88,23 +106,31 @@
 
                     },1000);
                 }
-                
 
-            })(loli.avalon);
+                //av.scan();
+            });
         </script>
 
         <script type="text/javascript">
-        ;(function(av){
-            "use strict";
-            var vm = av.define({
-                $id : "master.main.head",
-                view : {
-                    url : require.toUrl("modules/menu/indexmenu.html")
-                },
-                event : {},
-                model : {}
+            ;require(["av"],function(av){
+                "use strict";
+                var vm = av.define({
+                    $id : "master.main.head",
+                    view : {
+                        url : require.toUrl("modules/menu/indexmenu.html")
+                    },
+                    event : {},
+                    model : {}
+                });
             });
-        })(loli.avalon);
         </script>
+
+        <script type="text/javascript">
+            ;require(["av"],function(av){
+                "use strict";
+                av.scan();
+            });
+        </script>
+
     </body>
 </html>
