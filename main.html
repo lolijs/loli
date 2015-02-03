@@ -10,19 +10,11 @@
         <script src="/external/jquery/jquery.js" type="text/javascript"></script>
         
     </head>
-    <body ms-controller="master.main" id="testID">
+    <body ms-controller="main">
 
-        <div ms-controller="master.main.head" 
-            ms-include-src="{{view.url}}">
+        <div ms-include-src="{{view.header}}"></div>
 
-        </div>
-
-        <!-- 布局 -->
-        <div ms-repeat="view.layout" 
-            ms-attr-class="$key"
-            ms-if-loop="$val">{{$val}} {{view.head.title}}</div>
-
-        <a ms-on-click="event.submit(model)">保存</a>
+        <div ms-include-src="{{view.footer}}"></div>
 
         <!-- 尾部公用js -->
         <script type="text/javascript">
@@ -30,87 +22,25 @@
                 "use strict";
                 
                 var vm = av.define({
-                    $id : "master.main",
+                    $id : "main",
                     // 布局对象
                     view : {
-                        layout : {
-                            //east : true,
-                            south : true,
-                            west : true,
-                            north : {
-                                class : "north"
-                            },
-                            central : true
-                        },
-                        head : {
-                            title : "首页"
-                        }
+                        header : require.toUrl("layout/common/header.html"),
+                        footer : require.toUrl("layout/common/footer.html")
                     },
 
                     // 事件对象
                     event : {
-                        submit : function(data){
-                            console.log(data,data.$model.a);
-                            data.sent("/api/dd",data.$model.a);
-                        }
                     },
 
                     // 数据对象
                     model : {
-                        a:1,
-                        b:2
                     }
 
                 });
 
-                // 添加监听
-                {
-                    // 全部监听
-                    vm.$watch("$all",function(v){
-                        console.log("$all");
-                    });
-
-                    // title的监听
-                    vm.view.head.$watch("title",function(v){
-                        $("head:first title").text(v);
-                    });
-                }
-
-                // 测试
-                {
-                    setTimeout(function(){
-                        // model
-                        console.log(av.vmodels);
-                        var vm = av.vmodels["master.main"];
-                        vm.view.head.title = "dd";
-
-                    },1000);
-                }
-
-                //av.scan();
+                vm.scan();
             });
         </script>
-
-        <script type="text/javascript">
-            ;require(["av"],function(av){
-                "use strict";
-                var vm = av.define({
-                    $id : "master.main.head",
-                    view : {
-                        url : require.toUrl("modules/menu/indexmenu.html")
-                    },
-                    event : {},
-                    model : {}
-                });
-            });
-        </script>
-
-        <script type="text/javascript">
-            ;require(["av"],function(av){
-                "use strict";
-                av.scan();
-            });
-        </script>
-
     </body>
 </html>

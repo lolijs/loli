@@ -1,4 +1,4 @@
-<ul ms-controller="menu.indexmenu" >
+<ul ms-controller="modules.others.aboutus" >
     <li>
         {{view.title}}
     </li>
@@ -7,13 +7,13 @@
 ;require(["av"],function(av){
     "use strict";
     var vm = av.define({
-        $id : "menu.indexmenu",
+        $id : "modules.others.aboutus",
         view : {
-            title : "Hello"
+            title : "About Us"
         },
         event : {},
         model : {}
     });
-    av.scan();
+    vm.scan();
 });
 </script>

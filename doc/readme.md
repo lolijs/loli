@@ -1,7 +1,7 @@
 #标准写法
 
 <!-- HTML部分 -->
-<ul ms-controller="menu.indexmenu" >
+<ul ms-controller="路径.文件名" >
     <li>
         {{view.title}}
     </li>
@@ -12,14 +12,15 @@
 ;require(["av"],function(av){
     "use strict";
     var vm = av.define({
-        $id : "menu.indexmenu",
+        $id : "路径.文件名",
         view : {
             title : "Hello"
         },
         event : {},
         model : {}
     });
-    av.scan();
+    // 扫描自己
+    vm.scan();
 });
 </script>
 
@@ -32,3 +33,18 @@
 	event : 事件
 	model : 数据模型 , 需要后台交互的数据
 3. 封装model层, 让数据自动提交
+
+# 开发规则
+1. 构建API;
+2. 给出模拟数据;
+3. 前端(界面,IOS,Android)拿模拟数据开发;
+4. 后端依照API开发;
+
+# Json 数据规范
+{
+    "res" : 1, // 0 失败; 1 成功
+    "msg" : "消息内容",
+    "data" : { // 数据集
+
+    }
+}

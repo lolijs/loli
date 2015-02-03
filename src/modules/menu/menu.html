@@ -1,19 +1,19 @@
-<div ms-controller="common.head">
-	<ul>
-		<li>{{view.title}}</li>
-	</ul>	
-</div>
+<ul ms-controller="modules.menu.menu" >
+    <li>
+        {{view.title}}
+    </li>
+</ul>
 <script type="text/javascript">
 ;require(["av"],function(av){
     "use strict";
     var vm = av.define({
-        $id : "common.head",
+        $id : "modules.menu.menu",
         view : {
-            title : "Hello"
+            title : "Menu"
         },
         event : {},
         model : {}
     });
-    av.scan();
+    vm.scan();
 });
 </script>
