@@ -1,0 +1,19 @@
+<div ms-controller="common.head">
+	<ul>
+		<li>{{view.title}}</li>
+	</ul>	
+</div>
+<script type="text/javascript">
+;require(["av"],function(av){
+    "use strict";
+    var vm = av.define({
+        $id : "common.head",
+        view : {
+            title : "Hello"
+        },
+        event : {},
+        model : {}
+    });
+    av.scan();
+});
+</script>

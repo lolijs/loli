@@ -19,7 +19,8 @@
 
         <!-- 布局 -->
         <div ms-repeat="view.layout" 
-            ms-class="$key">{{$val}} {{view.head.title}}</div>
+            ms-attr-class="$key"
+            ms-if-loop="$val">{{$val}} {{view.head.title}}</div>
 
         <a ms-on-click="event.submit(model)">保存</a>
 
@@ -33,10 +34,12 @@
                     // 布局对象
                     view : {
                         layout : {
-                            east : true,
+                            //east : true,
                             south : true,
                             west : true,
-                            north : true,
+                            north : {
+                                class : "north"
+                            },
                             central : true
                         },
                         head : {
