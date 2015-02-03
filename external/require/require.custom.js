@@ -11,6 +11,6 @@
     });
 
     require([
-        "/external/require/require-config.js"
+        "/external/require/require.config.js"
     ]);
 })();
