@@ -5,7 +5,7 @@
 		//请确保srcRoot第二个被赋值
 		srcRoot = 'src/',
 		//请确保productRoot第三个被赋值
-		productRoot = 'build/',
+		productRoot = 'dist/',
 		//请确保siteVersion第四个被赋值
 		siteVersion = "1.0.178",
 		//请确保debug第五个被赋值
