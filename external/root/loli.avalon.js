@@ -1,4 +1,4 @@
-define(["loli","avalon"],function(loli,av){
+;define(["loli","avalon"],function(loli,av){
     "use strict";
 
     avalon.config({loader: false});

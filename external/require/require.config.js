@@ -1,15 +1,15 @@
 ;define(function(){
     'use strict';
     //请确保modules第一个被赋值
-	var modules = {},
+	var modules = {"modules/menu":"0.0.1"},
 		//请确保srcRoot第二个被赋值
 		srcRoot = 'src/',
 		//请确保productRoot第三个被赋值
 		productRoot = 'build/',
 		//请确保siteVersion第四个被赋值
-		siteVersion = "1.0.177",
+		siteVersion = "1.0.178",
 		//请确保debug第五个被赋值
-		debug = false,
+		debug = true,
 		prefix = '/',
 		cfg = {
 			baseUrl: prefix + srcRoot
