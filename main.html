@@ -14,7 +14,7 @@
     </head>
     <body ms-controller="main">
 
-        <div ms-include-src="{{view.header}}"></div>
+        <div ms-include-src="{{view.header.url}}"></div>
 
         <div ms-include-src="{{view.footer}}"></div>
 
@@ -27,7 +27,9 @@
                     $id : "main",
                     // 布局对象
                     view : {
-                        header : require.toUrl("layout/common/header.html"),
+                        header : {
+                            url : require.toUrl("layout/common/header.html")
+                        },
                         footer : require.toUrl("layout/common/footer.html")
                     },
 

@@ -1,10 +1,74 @@
 ;define(["loli","avalon"],function(loli,av){
     "use strict";
     // 配置
-    avalon.config({loader: false});
+    {
+       avalon.config({loader: false});
+    }
 
-    loli.avalon = {};
-    avalon.mix(loli.avalon,av);
+    // 定义
+    {
+        loli.avalon = {};
+        avalon.mix(loli.avalon,av);    
+    }
+
+    // model 工厂
+    {
+        var model = loli.avalon.model = {};
+        model.create = function(vm,data){
+            var self = this;
+            if(data){
+                vm.model = data
+            }
+            vm.model.$sent = this.sent;
+            vm.model.$get = function(param){
+                self.get.call(vm,param);   
+            }
+            console.log("model",vm.model);
+        };
+
+        // 发送请求
+        model.sent = function(url,data){
+            data = data || this.$model;
+            console.log(url,data);
+            $.ajax({
+                url : url,
+                data : data
+            });
+        };
+
+        // 获取数据
+        model.get = function(param){
+            console.log("in get",this);
+            var vm = this;
+            var setting = {
+                dataType : "json"
+            };
+            setting = avalon.mix(param,setting);
+
+            setting.success = function(json){
+                console.log("sss");
+                var dd,key;
+                if(json && json.res == 1){
+                    // 从新创建 model
+                    model.create(vm, json.data);
+                    console.log("vm.model success...",vm.model);
+                    // for(key in $model){
+                    //     self[key] = dd[key];
+                    // }
+                    if(param.success && typeof param.success == "function"){
+                        param.success();
+                    }
+                }
+            }
+
+            $.ajax(setting);
+        };
+
+    }
+    
+
+
+    // define 工厂
 
     loli.avalon.define = function(param){
         var setting = {};
@@ -22,22 +86,17 @@
         }
 
         
-        var mm = av.define(setting);
-        // 对model 做封装
-        mm.model.sent = function(url,data){
-            data = data || this.$model;
-            console.log(url,data);
-            $.ajax({
-                url : url,
-                data : data
-            });
-        };
+        var vm = av.define(setting);
+        // 构建vm的model 对象
+        model.create(vm);
 
-        mm.scan = function(elem,vmodel){
+        console.log("vm.model",vm.model);
+
+        vm.scan = function(elem,vmodel){
             var self = this;
             av.scan(setting.$el,this);
         }
-        return mm;
+        return vm;
     };
 
     return loli.avalon;

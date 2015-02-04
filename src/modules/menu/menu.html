@@ -1,19 +1,31 @@
-<ul ms-controller="modules.menu.menu" >
-    <li>
-        {{view.title}}
-    </li>
-</ul>
+<div ms-controller="modules.menu.menu" >
+    <h1>{{model.detail.dd}}</h1>
+    <h1>{{model.detail.bb.cc}}</h1>
+    <h1>{{model.list}}</h1>
+    <ul>
+        <li ms-repeat="model.title">
+            {{view.title}}{{el}}
+        </li>
+    </ul>
+</div>
 <script type="text/javascript">
 ;require(["av"],function(av){
     "use strict";
+
     var vm = av.define({
         $id : "modules.menu.menu",
         view : {
-            title : "Menu"
+            title : "hi"
         },
-        event : {},
-        model : {}
+        event : {}
     });
-    vm.scan();
+
+    vm.model.$get({
+        url : require.toUrl("modules/menu/menu.json"),
+        success : function(){
+             vm.scan();
+        }
+    });
+    vm.scan(); 
 });
 </script>
