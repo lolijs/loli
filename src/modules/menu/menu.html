@@ -1,5 +1,5 @@
 <div ms-controller="modules.menu.menu" >
-    <h1>{{model.menu.detail.dd}}</h1>
+    <h1>{{model.menu.data.detail.dd}}</h1>
     <h1>{{model.menu.detail.bb.cc}}</h1>
     <h1>{{model.menu.list}}</h1>
     <ul>
@@ -21,18 +21,33 @@
             }
         },
         event : {},
+        // 模型集合
         model : {
+            // 模型
             menu : {
-                url : require.toUrl("modules/menu/menu.json"),
-                success : function(){
-                    console.log("===get===");
-                } 
+                // 监听 setting 变化 做ajax 请求 
+                // 刷新 data 数据
+                setting : {
+                    url : require.toUrl("modules/menu/menu.json"),
+                    success : function(){
+                        console.log("===menu===");
+                    } 
+                },
+                // 页面绑定 远程数据
+                data : {
+
+                }
             },
             m2 : {
-                url : require.toUrl("modules/menu/m2.json"),
-                success : function(){
-                    console.log("===get===");
-                } 
+                setting : {
+                    url : require.toUrl("modules/menu/m2.json"),
+                    success : function(){
+                        console.log("===m2===");
+                    } 
+                },
+                data : {
+
+                }
             }
         }
     });
