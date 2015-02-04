@@ -29,7 +29,6 @@
         // 发送请求
         model.sent = function(url,data){
             data = data || this.$model;
-            console.log(url,data);
             $.ajax({
                 url : url,
                 data : data
@@ -38,7 +37,6 @@
 
         // 获取数据
         model.get = function(param){
-            console.log("in get",this);
             var vm = this;
             var setting = {
                 dataType : "json"
@@ -46,15 +44,10 @@
             setting = avalon.mix(param,setting);
 
             setting.success = function(json){
-                console.log("sss");
                 var dd,key;
                 if(json && json.res == 1){
                     // 从新创建 model
                     model.create(vm, json.data);
-                    console.log("vm.model success...",vm.model);
-                    // for(key in $model){
-                    //     self[key] = dd[key];
-                    // }
                     if(param.success && typeof param.success == "function"){
                         param.success();
                     }
@@ -74,14 +67,14 @@
         var setting = {};
         // 只接收 固定的参数;
         var attrId = setting.$id = param.$id;
-        setting.view = param.view;
-        setting.model = param.model;
-        setting.event = param.event;
+        // 
+        setting.view = param.view || {};
+        setting.model = param.model || {};
+        setting.event = param.event || {};
         setting.$el = "";
 
         var el = $("[ms-controller='"+attrId+"']:first");
         if(el && el.length > 0){
-            console.log("el",el);
             setting.$el = el[0];
         }
 
@@ -89,8 +82,6 @@
         var vm = av.define(setting);
         // 构建vm的model 对象
         model.create(vm);
-
-        console.log("vm.model",vm.model);
 
         vm.scan = function(elem,vmodel){
             var self = this;
