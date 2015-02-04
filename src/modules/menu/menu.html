@@ -1,11 +1,12 @@
 <div ms-controller="modules.menu.menu" >
-    <h1>{{model.detail.dd}}</h1>
-    <h1>{{model.detail.bb.cc}}</h1>
-    <h1>{{model.list}}</h1>
+    <h1>{{model.menu.detail.dd}}</h1>
+    <h1>{{model.menu.detail.bb.cc}}</h1>
+    <h1>{{model.menu.list}}</h1>
     <ul>
-        <li ms-repeat="model.title">
-            {{view.title}}{{el}}
-        </li>
+        <li ms-repeat="model.menu.title">{{view.title.t1}}{{el}}</li>
+    </ul>
+    <ul>
+        <li ms-repeat="model.m2.title">{{view.title.t1}}{{el}}</li>
     </ul>
 </div>
 <script type="text/javascript">
@@ -15,17 +16,28 @@
     var vm = av.define({
         $id : "modules.menu.menu",
         view : {
-            title : "hi"
+            title : {
+                t1 : "hi"
+            }
         },
-        event : {}
-    });
-
-    vm.model.$get({
-        url : require.toUrl("modules/menu/menu.json"),
-        success : function(){
-            console.log("===get===");
+        event : {},
+        model : {
+            menu : {
+                url : require.toUrl("modules/menu/menu.json"),
+                success : function(){
+                    console.log("===get===");
+                } 
+            },
+            m2 : {
+                url : require.toUrl("modules/menu/m2.json"),
+                success : function(){
+                    console.log("===get===");
+                } 
+            }
         }
     });
+
+    //vm.model.menu.$get();
     vm.scan(); 
 });
 </script>

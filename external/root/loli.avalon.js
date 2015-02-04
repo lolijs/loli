@@ -8,28 +8,37 @@
     // 定义
     {
         loli.avalon = {};
-        avalon.mix(loli.avalon,av);    
+        avalon.mix(loli.avalon,av);
     }
 
     // model 工厂
     {
         var model = loli.avalon.model = {};
-        model.create = function(vm,data){
+        model.create = function(vm,models,data){
+            // 如果没有设置 models 和 data 就退出
+            if(!models && !data) return false;
+            
             var self = this;
-            if(data){
-                vm.model = data
+            var _model,key,_success,_param={};
+            // 循环遍model集合
+            for(key in models){
+                _model = models[key];
+                _model.custom = {
+                    vm : vm,
+                    key : key
+                };
+                // 配置好参数
+                avalon.mix(_param,_model);
+                // 请求数据
+                self.get(_param);
             }
-            vm.model.$sent = this.sent;
-            vm.model.$get = function(param){
-                self.get.call(vm,param);   
-            }
-            console.log("model",vm.model);
         };
 
         // 发送请求
-        model.sent = function(url,data){
+        model.post = function(url,data){
             data = data || this.$model;
             $.ajax({
+                type : "post",
                 url : url,
                 data : data
             });
@@ -39,22 +48,37 @@
         model.get = function(param){
             var vm = this;
             var setting = {
+                type : "get",
                 dataType : "json"
             };
-            setting = avalon.mix(param,setting);
+            setting = avalon.mix(setting,param);
 
             setting.success = function(json){
-                var dd,key;
+                var dd,key,obj,$model;
                 if(json && json.res == 1){
-                    // 从新创建 model
-                    model.create(vm, json.data);
+                    // 替换model, 必须从新赋值model, 否则无法触发监听
+                    {
+                        // model 对应的 key
+                        key = setting.custom.key;
+                        obj = {};
+                        // model 原始数据
+                        $model = setting.custom.vm.model.$model;
+                        // 获取最新数据
+                        obj[key] = json.data;
+                        // 综合现有数据
+                        avalon.mix(obj,$model);
+                        // 替换整个model 触发监听
+                        setting.custom.vm.model = obj;    
+                    }
+                    
+                    // 回调
                     if(param.success && typeof param.success == "function"){
-                        param.success();
+                        param.success(json.data);
                     }
                 }
             }
 
-            $.ajax(setting);
+            return $.ajax(setting);
         };
 
     }
@@ -67,9 +91,10 @@
         var setting = {};
         // 只接收 固定的参数;
         var attrId = setting.$id = param.$id;
-        // 
+
         setting.view = param.view || {};
-        setting.model = param.model || {};
+        // 默认给空, 显示声明 model 为 空对象
+        setting.model = {};
         setting.event = param.event || {};
         setting.$el = "";
 
@@ -78,10 +103,9 @@
             setting.$el = el[0];
         }
 
-        
         var vm = av.define(setting);
-        // 构建vm的model 对象
-        model.create(vm);
+        // 加载 model 的数据
+        model.create(vm,param.model);
 
         vm.scan = function(elem,vmodel){
             var self = this;
