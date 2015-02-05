@@ -13,6 +13,7 @@
         
     </head>
     <body ms-controller="main">
+        <h1>{{view.title}}</h1>
 
         <div ms-include-src="{{view.header.url}}"></div>
 
@@ -30,7 +31,8 @@
                         header : {
                             url : require.toUrl("layout/common/header.html")
                         },
-                        footer : require.toUrl("layout/common/footer.html")
+                        footer : require.toUrl("layout/common/footer.html"),
+                        title : "Main"
                     },
 
                     // 事件对象
@@ -38,6 +40,8 @@
                     }
 
                 });
+
+                console.log("main vm",vm);
 
                 vm.scan();
             });

@@ -11,42 +11,31 @@
         avalon.mix(loli.avalon,av);
     }
 
-    // model 工厂
-    {
-        var model = loli.avalon.model = {};
-        model.create = function(vm,models,data){
-            // 如果没有设置 models 和 data 就退出
-            if(!models && !data) return false;
+    // Model 工厂
+    var MFactory = function(param){
+        var self = this,
+            setting = {
+                $id : param.$id,
+                setting : param.setting,
+                data : param.data || {},
+                get : self.get,
+                post : self.post
+            },key;
+
+        for(key in setting){
+            self[key] = setting[key];
+        }
+    };
+    MFactory.prototype = {
+        constructor : MFactory,
+        init : function(vm){
+            this.vm = vm;
+            this.get();
+        },
+        get : function(){
+            var vm = this.vm;
+            var param = vm.setting.$model;
             
-            var self = this;
-            var _model,key,_success,_param={};
-            // 循环遍model集合
-            for(key in models){
-                _model = models[key];
-                _model.custom = {
-                    vm : vm,
-                    key : key
-                };
-                // 配置好参数
-                avalon.mix(_param,_model);
-                // 请求数据
-                self.get(_param);
-            }
-        };
-
-        // 发送请求
-        model.post = function(url,data){
-            data = data || this.$model;
-            $.ajax({
-                type : "post",
-                url : url,
-                data : data
-            });
-        };
-
-        // 获取数据
-        model.get = function(param){
-            var vm = this;
             var setting = {
                 type : "get",
                 dataType : "json"
@@ -57,19 +46,7 @@
                 var dd,key,obj,$model;
                 if(json && json.res == 1){
                     // 替换model, 必须从新赋值model, 否则无法触发监听
-                    {
-                        // model 对应的 key
-                        key = setting.custom.key;
-                        obj = {};
-                        // model 原始数据
-                        $model = setting.custom.vm.model.$model;
-                        // 获取最新数据
-                        obj[key] = json.data;
-                        // 综合现有数据
-                        avalon.mix(obj,$model);
-                        // 替换整个model 触发监听
-                        setting.custom.vm.model = obj;    
-                    }
+                    vm.data = json.data;
                     
                     // 回调
                     if(param.success && typeof param.success == "function"){
@@ -79,37 +56,73 @@
             }
 
             return $.ajax(setting);
-        };
+        },
+        post : function(){
+            var setting = this.setting.$model;
+            var data = JSON.stringify(this.data.$model);
+            console.log("this",this,data);
+            var _setting = {
+                type : "post",
+                data : data
+            },key;
+            for(key in setting){
+                _setting[key] = setting[key];
+            }
+            console.log("setting",_setting);
+            $.ajax(_setting);
+        }
+    };
 
-    }
+    // VM工厂
+    var VMFactory = function(param){
+        var self = this,
+            setting = {
+                $id : param.$id,
+                view : param.view,
+                events : param.events || {}
+            },key;
+
+        for(key in setting){
+            self[key] = setting[key];
+        }
+    };
+    VMFactory.prototype = {
+        constructor : VMFactory
+    };
     
-
-
     // define 工厂
+    loli.avalon.define = function(flag,param){
+        var setting = {},_id,_el;
+        if(typeof flag == "object"){
+            param = flag;
+            setting = new VMFactory(param);
+            console.log("v",setting);
+        }else if(flag == "Model"){
+            setting = new MFactory(param);
+        }
 
-    loli.avalon.define = function(param){
-        var setting = {};
-        // 只接收 固定的参数;
-        var attrId = setting.$id = param.$id;
+        // 设置 el
+        {
+            _id = setting.$id;
+            setting.$el = "";
+            _el = $("[ms-controller='"+_id+"']:first");
+            if(_el && _el.length > 0){
+                setting.$el = _el[0];
+            }
+        }
 
-        setting.view = param.view || {};
-        // 默认给空, 显示声明 model 为 空对象
-        setting.model = {};
-        setting.event = param.event || {};
-        setting.$el = "";
-
-        var el = $("[ms-controller='"+attrId+"']:first");
-        if(el && el.length > 0){
-            setting.$el = el[0];
+        {
+            setting.scan = function(elem,vmodel){
+                var self = this;
+                av.scan(setting.$el,this);
+            }
         }
 
         var vm = av.define(setting);
         // 加载 model 的数据
-        model.create(vm,param.model);
-
-        vm.scan = function(elem,vmodel){
-            var self = this;
-            av.scan(setting.$el,this);
+        //model.create(vm,param.model);
+        if(flag == "Model"){
+            setting.init(vm);
         }
         return vm;
     };
