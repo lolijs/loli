@@ -3,7 +3,12 @@
     var paths = {
         "loli" : "/external/root/loli",
         "avalon" : "/external/avalon/avalon.shim",
-        "av" : "/external/root/loli.avalon"
+        "av" : "/external/root/loli.avalon",
+        "mmHistory" : "/external/avalon/mmHistory"
+    };
+
+    var map = {
+        
     };
 
     require.config({
