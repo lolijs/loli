@@ -17,14 +17,9 @@
     <body ms-controller="main">
         <h1>{{view.title}}</h1>
 
-        
-
-        <div ms-include-src="view.footer"></div>
-
-        <a ms-href="view.page.user">t1 {{ view.page.text }}</a>
-        <a ms-href="view.page.userdetail">t2 {{ view.page.text }}</a>
-
-        <a href="#!/userlist">home</a>  <a href="#!/menu">menu</a>  <a href="#!/about">about</a>
+        <a href="#!/userlist">home</a>
+        <a href="#!/menu">menu</a>
+        <a href="#!/about">about</a>
         <div ms-view></div>
 
         <!-- 尾部公用js -->
@@ -36,30 +31,8 @@
                     $id : "main",
                     // 布局对象
                     view : {
-                        header : {
-                            url : require.toUrl("layout/common/header.html")
-                        },
-                        footer : require.toUrl("layout/common/footer.html"),
-                        title : "Main",
-                        page : {
-                            user : "#/layout/user/userlist.html",
-                            text : "uuser",
-                            userdetail : "#/layout/user/userdetail.html"
-                        }
                     }
                 });
-
-                
-
-                console.log("main vm",vm);
-                // vm.view.content = "#/layout/user/userlist.html";
-
-                // av.router.get("/layout/user/userlist.html", function(a) {
-                //     console.log("== get ==")
-                //     vm.view.content = require.toUrl(this.path)
-                // })
-
-                
 
                 vm.scan();
             });

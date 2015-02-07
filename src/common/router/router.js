@@ -26,7 +26,7 @@
         views: {
             "": {
                 templateUrl: require.toUrl("modules/menu/menu.html"),
-                onAfterLoad : require(["modules/menu/menu"])
+                onChange : require(["modules/menu/menu"])
             }
         }
     });
