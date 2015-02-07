@@ -1,4 +1,4 @@
-;define(["loli","avalon"],function(loli,av){
+;define(["loli","mmState"],function(loli,av){
     "use strict";
     // 配置
     {

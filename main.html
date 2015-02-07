@@ -2,12 +2,12 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <!-- Google 爬虫规则 -->
+        <meta name="fragment" content="!" />
         <title>首页</title>
 
         <script src="/external/require/require.js" type="text/javascript"></script>
         <script src="/external/require/require.custom.js" type="text/javascript"></script>
-        
-        <script src="/external/avalon/mmRouter.js" type="text/javascript"></script>
 
         <script src="/external/jquery/jquery.js" type="text/javascript"></script>
         <link href="/external/semantic/dist/semantic.css" rel="stylesheet" type="text/css">
@@ -17,17 +17,21 @@
     <body ms-controller="main">
         <h1>{{view.title}}</h1>
 
-        <div ms-include-src="{{view.header.url}}"></div>
+        
 
-        <div ms-include-src="{{view.footer}}"></div>
+        <div ms-include-src="view.footer"></div>
 
-        <a ms-href="view.page.user">user</a>
+        <a ms-href="view.page.user">t1 {{ view.page.text }}</a>
+        <a ms-href="view.page.userdetail">t2 {{ view.page.text }}</a>
+
+        <a href="#!/userlist">home</a>  <a href="#!/menu">menu</a>  <a href="#!/about">about</a>
+        <div ms-view></div>
 
         <!-- 尾部公用js -->
         <script type="text/javascript">
-            ;require(["av"],function(av){
+            ;require(["loli","av","router"],function(loli,av){
                 "use strict";
-                
+
                 var vm = av.define({
                     $id : "main",
                     // 布局对象
@@ -38,17 +42,24 @@
                         footer : require.toUrl("layout/common/footer.html"),
                         title : "Main",
                         page : {
-                            user : "#!user"
+                            user : "#/layout/user/userlist.html",
+                            text : "uuser",
+                            userdetail : "#/layout/user/userdetail.html"
                         }
-                    },
-
-                    // 事件对象
-                    event : {
                     }
-
                 });
 
+                
+
                 console.log("main vm",vm);
+                // vm.view.content = "#/layout/user/userlist.html";
+
+                // av.router.get("/layout/user/userlist.html", function(a) {
+                //     console.log("== get ==")
+                //     vm.view.content = require.toUrl(this.path)
+                // })
+
+                
 
                 vm.scan();
             });
