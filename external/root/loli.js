@@ -1,6 +1,8 @@
 ;define(function(){
     "use strict";
     var loli = {};
+    loli.debug = require.data.debug;
+    loli.style = loli.debug ? "less" : "css";
 
     var unit = loli.unit = {};
     unit.hashToUrl = function(hash){
@@ -14,6 +16,16 @@
     			return require.toUrl(hash.substr(fl,hl));
     		}
     	}
+    };
+
+    unit.style = function(url){
+        return loli.style + "!" +url;
+    };
+    unit.js = function(url){
+        return url;
+    };
+    unit.html = function(url){
+        return require.toUrl(url+".html");
     };
 
     window["loli"] = loli;

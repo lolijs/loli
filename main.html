@@ -12,7 +12,6 @@
         <script src="/external/jquery/jquery.js" type="text/javascript"></script>
         <link href="/external/semantic/dist/semantic.css" rel="stylesheet" type="text/css">
         <script src="/external/semantic/dist/semantic.js" type="text/javascript"></script>
-        
     </head>
     <body ms-controller="main">
         <h1>{{view.title}}</h1>
@@ -24,18 +23,34 @@
 
         <!-- 尾部公用js -->
         <script type="text/javascript">
-            ;require(["loli","av","router"],function(loli,av){
-                "use strict";
 
-                var vm = av.define({
-                    $id : "main",
-                    // 布局对象
-                    view : {
-                    }
+            ;require(["router.config"],function(routerConfig){
+                "use strict";
+                
+                // 如果是debug 环境 就加载 less js
+                // if(require.data.debug){
+                //     routerConfig.unshift("less");
+                // };
+
+                // 数组头部添加 av 依赖
+                routerConfig.unshift("av");
+
+                ;require(routerConfig,function(av){
+                    var vm = av.define({
+                        $id : "main",
+                        // 布局对象
+                        view : {
+                        }
+                    });
+
+                    // 启动路由
+                    av.history.start();
+
+                    vm.scan();
                 });
 
-                vm.scan();
             });
+            
         </script>
     </body>
 </html>

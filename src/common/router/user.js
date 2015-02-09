@@ -1,5 +1,5 @@
 ;define(["av"],function(av){
-	
+    'use strict';
     av.state("userlist", {
         controller: "main",
         url: "/userlist",
@@ -19,20 +19,4 @@
             }
         }
     });
-
-    av.state("menu", {
-        controller: "main",
-        url: "/menu",
-        views: {
-            "": {
-                templateUrl: require.toUrl("modules/menu/menu.html"),
-                onChange : require(["modules/menu/menu"])
-            }
-        }
-    });
-
-
-
-    // 启动路由
-    av.history.start();
 });
