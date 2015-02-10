@@ -105,16 +105,21 @@
         {
             _id = setting.$id;
             setting.$el = "";
-            _el = $("[ms-controller='"+_id+"']:first");
+            _el = $("[ms-controller='"+_id+"']");
             if(_el && _el.length > 0){
-                setting.$el = _el[0];
+                setting.$el = _el;
             }
         }
 
         {
             setting.scan = function(elem,vmodel){
-                var self = this;
-                av.scan(setting.$el,this);
+                var self = this,_self;
+                console.log("setting.$el",setting.$el);
+                if(setting.$el){
+                    setting.$el.each(function(){
+                        av.scan(this,self);
+                    });    
+                }
             }
         }
 
