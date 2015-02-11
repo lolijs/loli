@@ -1,0 +1,1 @@
+define("common/router/router.config",function(){"use strict";var e,n=["main","user"],r=[],t="common/router/";for(e in n)r.push(t+n[e]);return r});

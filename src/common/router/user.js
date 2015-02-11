@@ -1,11 +1,12 @@
-;define(["av"],function(av){
+;define(["av","loli"],function(av,loli){
     'use strict';
+    var unit = loli.unit;
     av.state("userlist", {
         controller: "main",
         url: "/userlist",
         views: {
             "": {
-                templateUrl: require.toUrl("layout/user/userlist.html")
+                templateUrl: unit.html("layout/user/userlist")
             }
         }
     });
@@ -15,7 +16,7 @@
         url: "/userdetail",
         views: {
             "": {
-                templateUrl: require.toUrl("layout/user/userdetail.html")
+                templateUrl: unit.html("layout/user/userdetail")
             }
         }
     });

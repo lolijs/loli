@@ -1,22 +1,19 @@
-<div ms-controller="layout.user.userlist" >
+<div ms-controller="layout.user.userdetail" >
     <h1>
         {{view.title}}
     </h1>
     <div ms-include-src="{{view.menu}}"></div>
-    <a href="#!/userdetail">user detail</a>
 </div>
 <script type="text/javascript">
 ;require(["av"],function(av){
     "use strict";
-    var id = "layout.user.userlist";
     var vm = av.define({
-        $id : id,
+        $id : "layout.user.userdetail",
         view : {
-            title : "Hello , This is User Page!"
+            title : "Hello , This is Uuser Detail Page!"
         }
     });
 
-    // 扫描
     vm.scan();
 });
 </script>

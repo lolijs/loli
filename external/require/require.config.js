@@ -1,13 +1,13 @@
 ;define(function(){
     'use strict';
     //请确保modules第一个被赋值
-	var modules = {"modules/menu":"0.0.1"},
+	var modules = {"common/router":"0.0.1","layout/common":"0.0.1","layout/user":"0.0.1","modules/menu":"0.0.2","modules/others":"0.0.1"},
 		//请确保srcRoot第二个被赋值
 		srcRoot = 'src/',
 		//请确保productRoot第三个被赋值
 		productRoot = 'dist/',
 		//请确保siteVersion第四个被赋值
-		siteVersion = "1.0.178",
+		siteVersion = "1.0.179",
 		//请确保debug第五个被赋值
 		debug = true,
 		prefix = '/',
