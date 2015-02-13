@@ -10,7 +10,7 @@
         "mmRouter" : "/external/avalon/mmRouter",
         "mmPromise" : "/external/avalon/mmPromise",
         "mmState" : "/external/avalon/mmState",
-        "router.config" : "/src/common/router/router.config"
+        "rConfig" : "/src/common/router/router.config"
     };
 
     var packages = [];
