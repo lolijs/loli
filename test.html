@@ -13,18 +13,19 @@
         <link href="/external/semantic/dist/semantic.css" rel="stylesheet" type="text/css">
         <script src="/external/semantic/dist/semantic.js" type="text/javascript"></script>
     </head>
+    <!-- 全局控制器 -->
     <body ms-controller="main">
         <h1>{{view.title}}</h1>
 
-        <a href="#!/userlist">xxxxx</a>
-        <a href="#!/menu">menu</a>
-        <a href="#!/about">about</a>
+        <a href="#!/test">test</a>
+
+        <!-- 模块容器 -->
         <div ms-view></div>
 
         <!-- 尾部公用js -->
         <script type="text/javascript">
 
-            ;require(["router.config"],function(routerConfig){
+            ;require(["rConfig"],function(routerConfig){
                 "use strict";
                 
                 // 如果是debug 环境 就加载 less js
