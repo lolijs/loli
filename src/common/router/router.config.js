@@ -4,7 +4,8 @@
     // 系统需要的router
     var routerList = [
         "main",
-        "user"
+        "user",
+        "footer"
     ];
 
     var i,resList=[],baseurl="common/router/";

@@ -1,15 +1,16 @@
-;define(["av","loli"],function(av,loli){
+;define(["av"],function(av){
     "use strict";
-    var unit = loli.unit;
 
     var menuUrl = "modules/menu/menu";
+
+    console.log("menu url!!",av.html(menuUrl));
     av.state("menu", {
         controller: "main",
         url: "/menu",
         views: {
             "": {
-                templateUrl: unit.html(menuUrl),
-                onChange : require([unit.style(menuUrl),unit.js(menuUrl)])
+                templateUrl: av.html(menuUrl),
+                onChange : require([av.style(menuUrl),av.js(menuUrl)])
             }
         }
     });
