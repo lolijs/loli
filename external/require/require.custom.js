@@ -1,5 +1,7 @@
 ;require(["/external/require/require.config.js?v="+new Date().valueOf()],function(){
     'use strict';
+
+    var config = {};
     
     var paths = {
         "loli" : "/external/root/loli",
@@ -10,7 +12,7 @@
         "mmRouter" : "/external/avalon/mmRouter",
         "mmPromise" : "/external/avalon/mmPromise",
         "mmState" : "/external/avalon/mmState",
-        "rConfig" : "/src/common/router/router.config"
+        "rConfig" : "common/router/router.config"
     };
 
     var packages = [];
@@ -34,8 +36,11 @@
         // }
     };
 
-    require.config({
-        paths : paths,
-        packages : packages
-    });
+    config.paths = paths;
+    config.packages = packages;
+
+    // 如果是debug , 就去掉缓存
+    require.data.debug ? config.urlArgs = "v=" + (new Date()).getTime() : "";
+
+    require.config(config);
 });

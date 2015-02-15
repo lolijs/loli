@@ -1,6 +1,6 @@
 <div ms-controller="layout.common.footer">
     
-    <div ms-include-src="{{view.aboutus}}"></div>
+    <div ms-include-src="{{view.bLinks}}"></div>
 
 </div>
 <script type="text/javascript">
@@ -9,11 +9,9 @@
     var vm = av.define({
         $id : "layout.common.footer",
         view : {
-            aboutus : require.toUrl("modules/others/aboutus.html")
-        },
-        event : {},
-        model : {}
+            bLinks : av.html("modules/others/bLinks")
+        }
     });
-    av.scan();
+    vm.scan();
 });
 </script>

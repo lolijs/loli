@@ -8,7 +8,8 @@
     // 定义
     {
         loli.avalon = {};
-        avalon.mix(loli.avalon,av);
+        avalon.mix(loli.avalon,av,loli.unit);
+        console.log("loli.avalon",loli.avalon);
     }
 
     // Model 工厂
