@@ -1,6 +1,7 @@
-;require(["/external/require/require.config.js?v="+new Date().valueOf()],function(){
+;define(["/external/require/require.config.js?v="+new Date().valueOf()],function(){
     'use strict';
 
+    var config = {};
     var packages = [];
     if(require.data.debug){
         packages.push({

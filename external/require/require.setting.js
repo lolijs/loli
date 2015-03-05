@@ -9,10 +9,11 @@
         "mmRouter" : "/external/avalon/mmRouter",
         "mmPromise" : "/external/avalon/mmPromise",
         "mmState" : "/external/avalon/mmState",
-        "router.config" : "/src/common/router/router.config",
+        "rConfig" : "/src/common/router/router.config",
         "require.custom" : "/external/require/require.custom"
     };
     window.require = {
-        paths:paths
+        paths:paths,
+        deps : ["require.custom"]
     };
 })();
