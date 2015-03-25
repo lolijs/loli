@@ -4,42 +4,45 @@
         <meta charset="UTF-8">
         <!-- Google 爬虫规则 -->
         <meta name="fragment" content="!" />
-        <title>首页</title>
-        <link href="/external/haoui/css/common.css" rel="stylesheet" type="text/css">
+        <title>测试首页</title>
+        <script src="/external/require/require.setting.js" type="text/javascript"></script>
         <script src="/external/require/require.js" type="text/javascript"></script>
-        <script src="/external/require/require.custom.js" type="text/javascript"></script>
+
 
         <script src="/external/jquery/jquery.js" type="text/javascript"></script>
-        
+
     </head>
     <!-- 全局控制器 -->
     <body ms-controller="main">
         <h1>{{view.title}}</h1>
 
-        <a href="#!/test">test</a>
+        <a href="#!/userlist">home</a>
+        <a href="#!/menu">menu</a>
+        <a href="#!/about">about</a>
 
         <!-- 模块容器 -->
         <div ms-view></div>
+
+        <div ms-include-src="view.footer"></div>
 
         <!-- 尾部公用js -->
         <script type="text/javascript">
 
             ;require(["rConfig"],function(routerConfig){
                 "use strict";
-                
-                // 如果是debug 环境 就加载 less js
-                // if(require.data.debug){
-                //     routerConfig.unshift("less");
-                // };
 
                 // 数组头部添加 av 依赖
-                routerConfig.unshift("av");
+                var reArr = ["av"];
 
-                ;require(routerConfig,function(av){
+                console.log("routerConfig",routerConfig);
+
+                ;require(reArr.concat(routerConfig),function(av){
+                    var unit = loli.unit;
                     var vm = av.define({
                         $id : "main",
                         // 布局对象
                         view : {
+                            footer : av.html("layout/common/footer")
                         }
                     });
 
@@ -52,5 +55,7 @@
             });
             
         </script>
+
+
     </body>
 </html>
