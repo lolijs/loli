@@ -1,4 +1,4 @@
-;define(["/external/require/require.config.js?v="+new Date().valueOf()],function(){
+;define(function(){
     'use strict';
 
     var config = {};

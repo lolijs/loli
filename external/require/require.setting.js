@@ -14,6 +14,6 @@
     };
     window.require = {
         paths:paths,
-        deps : ["require.custom"]
+        deps : ["/external/require/require.config.js?v="+new Date().valueOf(),"require.custom"]
     };
 })();
