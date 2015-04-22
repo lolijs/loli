@@ -1,4 +1,4 @@
-;define(["mmHistory"], function() {
+define(["./mmHistory"], function() {
 
     function Router() {
         var table = {}
@@ -25,6 +25,17 @@
             path: path,
             query: query
         }
+    }
+
+
+    function queryToString(obj) {
+        if(typeof obj == 'string') return obj
+        var str = []
+        for(var i in obj) {
+            if(i == "query") continue
+            str.push(i + '=' + encodeURIComponent(obj[i]))
+        }
+        return str.length ? '?' + str.join("&") : ''
     }
 
     var placeholder = /([:*])(\w+)|\{(\w+)(?:\:((?:[^{}\\]+|\\.|\{(?:[^{}\\]+|\\.)*\})+))?\}/g
@@ -121,15 +132,65 @@
         setLastPath: function(path) {
             setCookie("msLastPath", path)
         },
-        // options.silent，当这个参数为true的时候，是不能触发url检测监听的
+        /*
+         *  @interface avalon.router.redirect
+         *  @param hash 访问的url hash
+         */
+        redirect: function(hash) {
+            this.navigate(hash, {replace: true})
+        },
+        /*
+         *  @interface avalon.router.navigate
+         *  @param hash 访问的url hash
+         *  @param options 扩展配置
+         *  @param options.replace true替换history，否则生成一条新的历史记录
+         *  @param options.silent true表示只同步url，不触发url变化监听绑定
+        */
         navigate: function(hash, options) {
             var parsed = parseQuery((hash.charAt(0) !== "/" ? "/" : "") + hash),
                 options = options || {}
             if(hash.charAt(0) === "/")
-                hash = hash.slice(1)// 修正出现多扛的情况 fix http://localhost:8383/mmRouter/index.html#!//
+                hash = hash.slice(1)// 修正出现多扛的情况 fix http://localhost:8383/index.html#!//
+            // 在state之内有写history的逻辑
+            if(!avalon.state || options.silent) avalon.history && avalon.history.updateLocation(hash, avalon.mix({}, options, {silent: true}))
             // 只是写历史而已
-            avalon.history && avalon.history.updateLocation(hash, avalon.mix({}, options, {silent: true}))
-            if(!options.silent) this.route("get", parsed.path, parsed.query)
+            if(!options.silent) {
+                this.route("get", parsed.path, parsed.query, options)
+            }
+        },
+        /*
+         *  @interface avalon.router.when 配置重定向规则
+         *  @param path 被重定向的表达式，可以是字符串或者数组
+         *  @param redirect 重定向的表示式或者url
+        */
+        when: function(path, redirect) {
+            var me = this,
+                path = path instanceof Array ? path : [path]
+            avalon.each(path, function(index, p) {
+                me.add("get", p, function() {
+                    var info = me.urlFormate(redirect, this.params, this.query)
+                    me.navigate(info.path + info.query, {replace: true})
+                })
+            })
+            return this
+        },
+        /*
+         *  @interface avalon.router.get 添加一个router规则
+         *  @param path url表达式
+         *  @param callback 对应这个url的回调
+        */
+        get: function(path, callback) {},
+        urlFormate: function(url, params, query) {
+            var query = query ? queryToString(query) : "",
+                hash = url.replace(placeholder, function(mat) {
+                    var key = mat.replace(/[\{\}]/g, '').split(":")
+                    key = key[0] ? key[0] : key[1]
+                    return params[key] || ''
+                }).replace(/^\//g, '')
+            return {
+                path: hash,
+                query: query
+            }
         },
         /* *
          `'/hello/'` - 匹配'/hello/'或'/hello'
@@ -171,7 +232,6 @@
             }
         }
     }
-
 
     "get,put,delete,post".replace(avalon.rword, function(method) {
         return  Router.prototype[method] = function(a, b, c) {
@@ -223,5 +283,61 @@
 
     avalon.router = new Router
 
-    return avalon;
-});
+    return avalon
+})
+/*
+ <!DOCTYPE html>
+ <html>
+ <head>
+ <meta charset="utf-8">
+ <title>路由系统</title>
+ <script src="avalon.js"></script>
+ <script>
+ require(["mmRouter"], function() {
+ var model = avalon.define('xxx', function(vm) {
+ vm.currPath = ""
+ })
+ avalon.router.get("/aaa", function(a) {
+ model.currPath = this.path
+ })
+ avalon.router.get("/bbb", function(a) {
+ model.currPath = this.path
+ })
+ avalon.router.get("/ccc", function(a) {
+ model.currPath = this.path
+ })
+ avalon.router.get("/ddd/:ddd", function(a) {//:ddd为参数
+ avalon.log(a)
+ model.currPath = this.path
+ })
+ avalon.router.get("/eee", function(a) {
+ model.currPath = this.path
+ })
+ avalon.history.start({
+ html5Mode: true,
+ basepath: "/avalon"
+ })
+ avalon.scan()
+ })
+ </script>
+ </head>
+ <body >
+ <div ms-controller="xxx">
+ <ul>
+ <li><a href="#!/aaa">aaa</a></li>
+ <li><a href="#!/bbb">bbb</a></li>
+ <li><a href="#!/ccc">ccc</a></li>
+ <li><a href="#!/ddd/222">ddd</a></li>
+ <li><a href="#!/eee">eee</a></li>
+ </ul>
+ <div style="color:red">{{currPath}}</div>
+ <div style="height: 600px;width:1px;">
+ 
+ </div>
+ <p id="eee">会定位到这里</p>
+ </div>
+ 
+ </body>
+ </html>
+ 
+ */
