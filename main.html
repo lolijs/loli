@@ -11,8 +11,6 @@
 
         <script src="/external/jquery/jquery.js" type="text/javascript"></script>
 
-        <link rel="stylesheet" type="text/css" href="/external/semantic/dist/semantic.css">
-
     </head>
     <!-- 全局控制器 -->
     <body ms-controller="main">
@@ -50,6 +48,7 @@
 
                     // 启动路由
                     av.history.start();
+                    console.log("av.history.start");
 
                     vm.scan();
                 });
