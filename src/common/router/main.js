@@ -11,22 +11,26 @@
             console.log("onBeforeUnload");
         },
         onAbort: function(from, to) {
-            console.log("onAbort");
+        	console.log("onBeforeUnload");
         },
         onBegin: function(from, to) {
-            console.log("onBegin");
+            var loading = avalon.vmodels.loading
+            if(loading) loading.toggle = true
         },
         onLoad: function(from, to) {
-            console.log("onLoad");
+            var loading = avalon.vmodels.loading
+            if(loading) loading.toggle = false
         },
         onError: function(keyname, state) {
-            console.log("onError");
+            console.log(arguments)
+            // avalon.router.navigate("/", {replace: true})
         },
         onViewEnter: function(newNode, oldNode) {
-            console.log("onViewEnter");
-        },
-        onUnload: function() {
-            avalon.log("unload")
+            oldNode.style.marginLeft = "-50%"
+            mmState.oldNodes.push(oldNode)
+            setTimeout(function() {
+                oldNode.parentNode && oldNode.parentNode.removeChild(oldNode)
+            }, 1000)
         }
     })
 

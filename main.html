@@ -11,9 +11,11 @@
 
         <script src="/external/jquery/jquery.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="/external/semantic/dist/semantic.css">
+        <link rel="stylesheet" type="text/css" href="/external/common/modules.css">
     </head>
     <!-- 全局控制器 -->
-    <body ms-controller="main">
+    <body ms-controller="main"
+        mss-widget="loading,loading" data-loading-type="img" data-loading-modal-background="#ccc" data-loading-modal-opacity="0.5">
         <h1>{{view.title}}</h1>
 
         <a href="#!/userlist">home</a>
@@ -21,7 +23,9 @@
         <a href="#!/about">about</a>
 
         <!-- 模块容器 -->
-        <div ms-view></div>
+        <div class="oni-helper-clearfix slider oni-helper-reset">
+            <div ms-view class="oni-mmRouter-slide"></div>
+        </div>
 
         <div ms-include-src="view.footer"></div>
 
