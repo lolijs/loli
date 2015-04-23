@@ -25,9 +25,6 @@
         onViewEnter: function(newNode, oldNode) {
             console.log("onViewEnter");
         },
-        onLoad: function() {
-            avalon.log("onload")
-        },
         onUnload: function() {
             avalon.log("unload")
         }
@@ -39,22 +36,9 @@
         views: {
             "": {
                 templateUrl: av.html(menuUrl),
-                onEnter : require([av.style(menuUrl),av.js(menuUrl)]),
-                controller : function($ctrl) {
-                    console.log("menu controller");
-                    // 视图被关闭时候回调
-                    $ctrl.$onBeforeUnload = function(a,b,c){
-                        console.log("menu onBeforeEnter",a,b,c);
-                    }
-                    $ctrl.$onBeforeExit = function(){
-                        console.log("menu onBeforeExit",a,b,c);
-                    }
-                }
-                
-            },
-            "hint@": {
-                template: "当前状态是contacts.detail.item.edit"
+                onEnter : require([av.style(menuUrl),av.js(menuUrl)])
             }
         }
     });
+
 });
