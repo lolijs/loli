@@ -4,6 +4,7 @@
     // 系统需要的router
     var routerList = [
         "main",
+        "index",
         "user",
         "footer"
     ];

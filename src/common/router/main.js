@@ -1,10 +1,6 @@
-;define(["av","modules/menu/menu"],function(av,menu){
+;define(["av"],function(av){
     "use strict";
-
-    var menuUrl = "modules/menu/menu";
-
-    console.log("menu url!!",av.html(menuUrl));
-
+    
     avalon.state.config({
         // 全局的onBeforeUnload
         onBeforeUnload: function(from, to) {
@@ -34,6 +30,7 @@
         }
     })
 
+    var menuUrl = "modules/menu/menu";
     av.state("menu", {
         controller: "main",
         url: "/menu",

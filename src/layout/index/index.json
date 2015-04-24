@@ -1,0 +1,11 @@
+{
+    "res" : 1, 
+    "msg" : "成功",
+    "data" : { 
+        "slide" : [
+            "/img/banner1.jpg",
+            "/img/banner2.jpg",
+            "/img/banner3.jpg"
+        ]
+    }
+}

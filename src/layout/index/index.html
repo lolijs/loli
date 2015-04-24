@@ -1,0 +1,103 @@
+<div ms-controller="layout.index.index.vm" id="layout_index_index">
+    <header class="bar bar-nav">
+      <a href="##" class="icon icon-sound2 pull-left"><span class="badge badge-negative">3</span></a>
+      <a href="##" class="btn btn-link btn-nav pull-right" style="color:#fff">社区</a>
+      <h1 class="title">{{view.header.h1}}</h1>
+    </header>
+    <nav class="bar bar-tab">
+        <a class="tab-item active" href="#">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item" href="/m/loan/list.html" data-transition="slide-in">
+            <span class="icon icon-list"></span>
+            <span class="tab-label">我要理财</span>
+        </a>
+        <a class="tab-item" href="/m/user/index.html" data-transition="slide-in">
+            <span class="icon icon-person"></span>
+            <span class="tab-label">我的用户</span>
+        </a>
+        <a class="tab-item" href="#settingsModal">
+            <span class="icon icon-gear"></span>
+            <span class="tab-label">设置</span>
+        </a>
+    </nav>  
+    <div class="content" ms-controller="layout.index.index.i1Model">
+      <div class="slider" id="mySlider">
+        <div class="slide-group">
+          <div class="slide" ms-repeat="data.slide">
+              <img ms-attr-src="view.toUrl(el)">
+          </div>
+        </div>
+      </div>
+      <div class="content-padded">
+        <h4 class="loan-title">投资新项目周转100万续借最后一标25万</h4>
+        <h4 class="loan-money">￥<i class="red">250,000</i></h4>
+      </div>
+      <div class="ouro-bg">
+        <div class="ouro">
+        <span class="ouro-text">
+          <p><i>100</i>%</p>
+          <p class="ouro-m">完成度</p>
+        </span>
+        </div>
+      </div>
+
+      <div class="segmented-control">
+        <a class="control-item">
+          <span class="item-name">年利率</span>
+          <span class="tab-label">21%</span>
+        </a>
+        <a class="control-item">
+          <span class="item-name">期限</span>
+          <span class="tab-label">12个月</span>
+        </a>
+        <a class="control-item">
+          <span class="item-name">剩余时间</span>
+          <span class="tab-label">2天10小时</span>
+        </a>
+      </div>
+      <a href="##" class="btn btn-negative btn-block">查看详情</a>
+    </div>
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <header class="bar bar-nav">
+            <a class="icon icon-close pull-right" href="#settingsModal"></a>
+            <h1 class="title">Settings Example</h1>
+        </header>
+
+        <div class="content">
+            <form class="input-group">
+                <input type="text" placeholder="Full name">
+                <input type="email" placeholder="Email">
+                <input type="text" placeholder="Username">
+            </form>
+
+            <h5 class="content-padded">App settings</h5>
+
+            <ul class="table-view">
+                <li class="table-view-cell media">
+                    <span class="media-object pull-left icon icon-sound"></span>
+                    <div class="media-body">
+                        Enable sounds
+                    </div>
+                    <div class="toggle">
+                        <div class="toggle-handle"></div>
+                    </div>
+                </li>
+                <li class="table-view-cell media">
+                    <span class="media-object pull-left icon icon-person"></span>
+                    <div class="media-body">
+                        Parental controls
+                    </div>
+                    <div class="toggle">
+                        <div class="toggle-handle"></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="content-padded">
+                <button class="btn btn-positive btn-block">Save settings</button>
+            </div>
+        </div>
+    </div>
+</div>
