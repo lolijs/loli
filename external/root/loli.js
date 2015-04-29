@@ -18,14 +18,29 @@
     	}
     };
 
-    unit.style = function(url){
-        return loli.style + "!" +url;
+    unit.style = function(url,key){
+        return this.localUrl(loli.style + "!" +url,key)
     };
-    unit.js = function(url){
-        return url;
+    unit.js = function(url,key){
+        return this.localUrl(url,key);
     };
-    unit.html = function(url){
-        return require.toUrl(url+".html");
+    unit.html = function(url,key){
+        return require.toUrl(this.localUrl(url+".html",key));
+    };
+    unit.json = function(url,key){
+        return require.toUrl(this.localUrl(url+".json",key));
+    };
+    unit.url = function(url,key){
+        return require.toUrl(this.localUrl(url,key));
+    };
+    unit.localUrl = function(url,id){
+        if(id){
+            var urlArr = id.split(".");
+            urlArr.pop();
+            return urlArr.join("/")+"/"+url;
+        }else{
+            return url;
+        }
     };
 
     window["loli"] = loli;

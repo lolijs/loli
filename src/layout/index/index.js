@@ -17,7 +17,8 @@
             baseUrl : baseUrl,
             header : {
                 h1 : "网站logo"
-            }
+            },
+            header : av.html("modules/header/h1")
         }
     });
 

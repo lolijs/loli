@@ -1,0 +1,43 @@
+<div ms-controller="modules.footer.menu.vm">
+
+    <nav class="bar bar-tab">
+        
+
+        <a ms-repeat="data" class="tab-item active" ms-href=" $val.link " data-transition="slide-in">
+            <span ms-class="icon {{$val.class}}"></span>
+            <span class="tab-label">{{$val.text}}</span>
+        </a>
+    </nav>
+</div>
+<script type="text/javascript">
+;require(["av"],function(av){
+    "use strict";
+    var $id = "modules.footer.menu";
+
+
+    // viewModel
+    var vm = av.define({
+        $id : $id+".vm",
+        view : {
+            title : {
+                t1 : "hi"
+            }
+        },
+        dic : av.json("dic/menu",$id)
+    });
+
+    // model
+    var model = av.define("Model",{
+        $id : $id+".vm",
+        // 监听 setting 变化 做ajax 请求 
+        setting : {
+            url : av.json("dic/menu",$id),
+            success : function(){
+                console.log("===menu===");
+            } 
+        }
+    });
+
+    vm.scan();
+});
+</script>

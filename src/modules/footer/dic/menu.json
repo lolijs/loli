@@ -1,0 +1,38 @@
+{
+    "res" : 1, 
+    "msg" : "成功",
+    "data" : { 
+        "m1" : {
+            "text" : "首页",
+            "link" : "#!/",
+            "class" : "icon-home",
+            "auth" : {
+
+            }
+        },
+        "m2" : {
+            "text" : "我要理财",
+            "link" : "#!/lion",
+            "class" : "icon-list",
+            "auth" : {
+                
+            }
+        },
+        "m3" : {
+            "text" : "我的用户",
+            "link" : "#!/user",
+            "class" : "icon-person",
+            "auth" : {
+                
+            }
+        },
+        "m4" : {
+            "text" : "更多",
+            "link" : "#!/more",
+            "class" : "icon-gear",
+            "auth" : {
+                
+            }
+        }
+    }
+}

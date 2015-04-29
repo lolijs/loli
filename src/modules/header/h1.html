@@ -1,0 +1,24 @@
+<div ms-controller="modules.header.h1.vm" id="modules_header_h1">
+    <header class="bar bar-nav">
+        <a href="/webapp/message/list.php" data-transition="slide-out" class="icon icon-sound2 pull-left"><span class="badge badge-negative">3</span></a>
+      <a href="##" class="btn btn-link btn-nav pull-right" style="color:#fff">社区</a>
+      <h1 class="title"><img ms-attr-src="view.header.m1"></h1>
+    </header>
+</div>
+<script type="text/javascript">
+;require(["av"],function(av){
+    "use strict";
+    var $id = "modules.header.h1";
+
+    // viewModel
+    var vm = av.define({
+        $id : $id+".vm",
+        view : {
+            header : {
+                m1 : av.url("img/logo@2x.png",$id)
+            }
+        }
+    });
+    vm.scan();
+});
+</script>
