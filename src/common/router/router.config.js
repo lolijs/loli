@@ -3,9 +3,9 @@
 
     // 系统需要的router
     var routerList = [
-        "main",
-        "index"
-        //"user",
+        "main", // 主框架
+        "index", // 首页
+        "user" // 用户中心
         //"footer"
     ];
 

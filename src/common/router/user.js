@@ -1,16 +1,19 @@
 ;define(["av"],function(av){
     'use strict';
-    av.state("userlist", {
+
+    var baseUrl = "layout/user/";
+
+    var indexUrl = baseUrl + "index";
+    av.state("user", {
         controller: "main",
-        url: "/userlist",
+        url: "/user",
         views: {
             "": {
-                templateUrl: av.html("layout/user/userlist")
+                templateUrl: av.html(indexUrl),
+                onEnter : require([av.js(indexUrl)])
             }
         }
-    });
-
-    av.state("userdetail", {
+    }).state("userdetail", {
         controller: "main",
         url: "/userdetail",
         views: {

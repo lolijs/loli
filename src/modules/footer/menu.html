@@ -1,9 +1,10 @@
+
 <div ms-controller="modules.footer.menu.vm">
 
     <nav class="bar bar-tab" ms-controller="modules.footer.menu.m">
         
 
-        <a ms-repeat="data" class="tab-item active" ms-href=" $val.link " data-transition="slide-in">
+        <a ms-repeat="data" class="tab-item " ms-href=" $val.link " >
             <span ms-class="icon {{$val.class}}"></span>
             <span class="tab-label">{{$val.text}}</span>
         </a>
