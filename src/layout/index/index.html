@@ -2,14 +2,8 @@
     
     <div ms-include-src="view.header"></div>
 
-    <div class="content" ms-controller="layout.index.index.i1Model">
-      <div class="slider" id="mySlider">
-        <div class="slide-group">
-          <div class="slide" ms-repeat="data.slide">
-              <img ms-attr-src="view.toUrl(el)">
-          </div>
-        </div>
-      </div>
+    <div class="content">
+      <div ms-include-src="view.banner"></div>
       <div class="content-padded">
         <h4 class="loan-title">投资新项目周转100万续借最后一标25万</h4>
         <h4 class="loan-money">￥<i class="red">250,000</i></h4>
@@ -38,46 +32,5 @@
         </a>
       </div>
       <a href="##" class="btn btn-negative btn-block">查看详情</a>
-    </div>
-    <!-- Settings Modal -->
-    <div id="settingsModal" class="modal">
-        <header class="bar bar-nav">
-            <a class="icon icon-close pull-right" href="#settingsModal"></a>
-            <h1 class="title">Settings Example</h1>
-        </header>
-
-        <div class="content">
-            <form class="input-group">
-                <input type="text" placeholder="Full name">
-                <input type="email" placeholder="Email">
-                <input type="text" placeholder="Username">
-            </form>
-
-            <h5 class="content-padded">App settings</h5>
-
-            <ul class="table-view">
-                <li class="table-view-cell media">
-                    <span class="media-object pull-left icon icon-sound"></span>
-                    <div class="media-body">
-                        Enable sounds
-                    </div>
-                    <div class="toggle">
-                        <div class="toggle-handle"></div>
-                    </div>
-                </li>
-                <li class="table-view-cell media">
-                    <span class="media-object pull-left icon icon-person"></span>
-                    <div class="media-body">
-                        Parental controls
-                    </div>
-                    <div class="toggle">
-                        <div class="toggle-handle"></div>
-                    </div>
-                </li>
-            </ul>
-            <div class="content-padded">
-                <button class="btn btn-positive btn-block">Save settings</button>
-            </div>
-        </div>
     </div>
 </div>

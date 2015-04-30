@@ -1,6 +1,6 @@
 <div ms-controller="modules.footer.menu.vm">
 
-    <nav class="bar bar-tab">
+    <nav class="bar bar-tab" ms-controller="modules.footer.menu.m">
         
 
         <a ms-repeat="data" class="tab-item active" ms-href=" $val.link " data-transition="slide-in">
@@ -28,12 +28,11 @@
 
     // model
     var model = av.define("Model",{
-        $id : $id+".vm",
+        $id : $id+".m",
         // 监听 setting 变化 做ajax 请求 
         setting : {
             url : av.json("dic/menu",$id),
             success : function(){
-                console.log("===menu===");
             } 
         }
     });

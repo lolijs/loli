@@ -1,0 +1,34 @@
+<div ms-controller="modules.banner.index.vm" class="slider" id="mySlider">
+    <div ms-controller="modules.banner.index.m" class="slide-group">
+        <div class="slide" ms-repeat="data.slide">
+            <img ms-attr-src="view.$toUrl(el)">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+;require(["av"],function(av){
+    "use strict";
+    var $id = "modules.banner.index";
+
+    // viewModel
+    var vm = av.define({
+        $id : $id+".vm",
+        view : {
+            $toUrl : function(url){
+                return av.url(url,$id);
+            }
+        }
+    });
+
+    // model
+    var m = av.define("Model",{
+        $id : $id+".m",
+        // 监听 setting 变化 做ajax 请求 
+        setting : {
+            url : av.json("data/index",$id)
+        }
+    });
+
+    vm.scan();
+});
+</script>

@@ -19,7 +19,6 @@
         setting : {
             url : require.toUrl("modules/menu/menu.json"),
             success : function(){
-                console.log("===menu===");
             } 
         }
     });
@@ -30,7 +29,6 @@
         setting : {
             url : require.toUrl("modules/menu/m2.json"),
             success : function(){
-                console.log("===m2===");
             } 
         }
     });

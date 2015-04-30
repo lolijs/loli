@@ -9,7 +9,6 @@
     {
         loli.avalon = {};
         avalon.mix(loli.avalon,av,loli.unit);
-        console.log("loli.avalon",loli.avalon);
     }
 
     // Model 工厂
@@ -61,7 +60,6 @@
         post : function(){
             var setting = this.setting.$model;
             var data = JSON.stringify(this.data.$model);
-            console.log("this",this,data);
             var _setting = {
                 type : "post",
                 data : data
@@ -69,7 +67,6 @@
             for(key in setting){
                 _setting[key] = setting[key];
             }
-            console.log("setting",_setting);
             $.ajax(_setting);
         }
     };
@@ -97,7 +94,6 @@
         if(typeof flag == "object"){
             param = flag;
             setting = new VMFactory(param);
-            console.log("v",setting);
         }else if(flag == "Model"){
             setting = new MFactory(param);
         }
@@ -115,7 +111,6 @@
         {
             setting.scan = function(elem,vmodel){
                 var self = this,_self;
-                console.log("setting.$el",setting.$el);
                 if(setting.$el){
                     setting.$el.each(function(){
                         av.scan(this,self);
