@@ -43,6 +43,55 @@
         }
     };
 
+    // 参数字符串转对象
+    unit.getUrlParam = function(){
+        var search = location.search;
+        var sStr,sArr,i,j,sArrStr,sArrStrArr,sKey,sVal,sData={};
+        var sl = search.length;
+        if(sl>1){
+            if(search.indexOf("?") == 0){
+                sStr = search.substr(1,sl);
+                sArr = sStr.split("&");
+                j = sArr.length;
+                for(i=0;i<j;i++){
+                    sArrStr = sArr[i];
+                    sArrStrArr = sArrStr.split("=");
+
+                    sKey = sArrStrArr[0];
+                    sVal = sArrStrArr[1];
+                    sData[sKey] = sVal;
+                }
+                return sData;
+            }
+
+        }else{
+            return "";
+        }
+    }
+
+    // 参数对象转字符串
+    unit.serialize = function(data){
+        if(!data || typeof data != "object") return ;
+
+        // 重置一下
+        var paramStr="",key,value;
+        // 格式化一下
+        for(key in data){
+            value = data[key];
+
+            // 如果key 存在
+            if(paramStr){
+                paramStr += "&" + key + "=" + value;
+            }else{
+                // 如果有值 就传
+                paramStr = key + "=" + value;   
+            }
+            
+        }
+        return encodeURI(paramStr);
+    }
+
+
     window["loli"] = loli;
     return loli;
 });
